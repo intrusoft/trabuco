@@ -1,0 +1,28 @@
+
+
+
+
+ +-+-+-+-+-+-+-+
+ |T|r|a|b|u|c|o|
+ +-+-+-+-+-+-+-+
+
+ Naive implementation of DHT over a UDP overlay network
+
+ This was just code I wrote for fun and learn more about the concepts of DHT
+
+ To use this:
+
+ Start this trabuco.py process on several nodes (or the same node, but different ports)
+ python trabuco.py --localip 127.0.0.1 --localport 10001 (first node)
+ python trabuco.py --localip 127.0.0.1 --localport 10002 --peerip 127.0.0.1 --peerport 10001  
+ (for each additional node, where localIP:localport are unique)
+
+ Peerip and peerport just need to point to another node already running trabuco, 
+ once connected, it will get a list of all the other peers can can connect directly to them
+
+ Use the query.py script to GET and SET keys/values
+ ./query.py --key foo --value bar
+
+Copyright © 2017 by Jean-Christophe Smith
+
+
