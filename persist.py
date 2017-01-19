@@ -1,6 +1,7 @@
 
 """
     Class for handling the keys of the node
+    For now we are just using an in memory dictionary, but could be extended to persist to disk
 """
 class Persist(object):
     data = {}
@@ -15,4 +16,12 @@ class Persist(object):
             return self.data[keyname]
         else:
             return None 
+
+    def delete(self, keyname):
+        if keyname in self.data.keys():
+            del self.data[keyname]
+
+    def getkeys(self):
+        return self.data.keys()
+
 
