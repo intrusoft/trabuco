@@ -1,26 +1,18 @@
 
+UDP Load Balancer
+ReST gateway
+S3
+NBD gateway
 
-If node can't keep up, messages are just lost from client
-There is now acknowledgment that key was actually written anywhere
-When peers join, a segment of the ring will no longer be valid, depending where the new node resides
-There are no health checks or removal of node if health check fails.
-detech a peer is down, send out acknowledgment to major of nodes to valid this, mark node for detetion
-Distribution doesn't exactly seem even
- timestamp or version on object to know if you are dealing with the latest version in a conflict
+Node failure/remove from cluster is not currently handled
+- add minimal overhead health check that can instanatly get concensus on bad node, then remove from lists
+- propogate removal of node from all nodes list
+- preserving the data from the bad node would take some sort data replica scheme
 
+Because things are UDP and not acknowleged, the mechanisms are best effort, but non-blocking
+It's possible to overwhelm node by sending too many requests at once
+Distribution doesn't seem implement 100%, there is some uneven keyspace usage
+Add versioning to deal with replica and race condition conflict resolution
 
-connect
-learn peers
-immediately notify two nearest peers of this node
+Intentionally not adding threading, which by default provides some node level atomicity 
 
-
-when a node gets a new list of peers, and it determines there is a change in nearest peer
-then initiate a self rebalance with that peer and atomicly moving data to the new node
-if you aren't threading, things stay fairly atomic at node level
-always have a master copy, but if master copy was not node that died, then find a way to find it from slave and put on new node that 
-is rightful master
-Could be used to develop concensus during race conditions, like when in the middle of a rebalance and there is a GET, you could fetch and compare version from backup
-
-UDP load balancer from end, direct return
-
-# at most only 3 monitoring one, concensus node is gone, take out
