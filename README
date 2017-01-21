@@ -23,6 +23,11 @@
  Use the query.py script to GET and SET keys/values
  ./query.py --key foo --value bar
 
+ ReST API
+     python restapi.py
+     curl -X POST -d 'foo=bar' http://localhost:5000/trabuco/keys/
+     curl http://localhost:5000/trabuco/keys/foo
+
 Copyright © 2017 by Jean-Christophe Smith
 
 
